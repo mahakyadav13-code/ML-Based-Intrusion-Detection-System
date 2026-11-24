@@ -1,0 +1,53 @@
+# Docker ignore file - exclude unnecessary files from Docker build
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Logs (will be generated in container)
+*.log
+logs/*.log
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Large data files (mount as volumes instead)
+data/raw/*.csv
+data/sample/*.csv
+
+# Temporary files
+*.tmp
+.DS_Store
+Thumbs.db
+
+# PowerShell scripts (Windows specific)
+*.ps1
+
+# Development files
+.env.local
+.env.development

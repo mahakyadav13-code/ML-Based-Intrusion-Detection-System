@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # ML-Based IDS Flask Application
+  ids-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ids-flask-app
+    ports:
+      - "5000:5000"
+    volumes:
+      # Mount data directories for persistence
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=${SECRET_KEY:-change-me-in-production}
+      - MAX_CONTENT_LENGTH=104857600
+    restart: unless-stopped
+    networks:
+      - ids-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: ids-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - ids-app
+    restart: unless-stopped
+    networks:
+      - ids-network
+
+networks:
+  ids-network:
+    driver: bridge
+
+volumes:
+  data-volume:
+  models-volume:
+  logs-volume:

@@ -1,0 +1,73 @@
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.virtualenv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Data files (keep raw data local)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/sample/
+
+# Models (large files)
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.model
+!models/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment variables
+.env
+.env.local
+
+# Reports
+reports/*
+!reports/.gitkeep
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Streamlit
+.streamlit/secrets.toml
